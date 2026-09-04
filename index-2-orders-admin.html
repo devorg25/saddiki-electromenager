@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saddiki Electroménager</title>
+  <meta name="description" content="Saddiki Electroménager - Électroménager et produits pour votre maison. Commandez facilement pour livraison.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black: #050505;
+      --white: #ffffff;
+      --gray: #a7a7a7;
+      --green: #25d366;
+      --accent: #7c3aed;
+      --accent2: #06b6d4;
+      --card: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      background: #000;
+      overflow: hidden;
+    }
+    .wave {
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      border-radius: 45%;
+      filter: blur(80px);
+      opacity: 0.28;
+      animation: waveMove 16s ease-in-out infinite alternate;
+    }
+    .wave.one { background: #7c3aed; top: -350px; left: -250px; }
+    .wave.two { background: #06b6d4; right: -350px; top: 5%; animation-duration: 20s; animation-delay: -4s; }
+    .wave.three { background: #ec4899; bottom: -450px; left: 25%; animation-duration: 18s; animation-delay: -8s; }
+    .wave.four { background: #2563eb; top: 45%; left: 45%; animation-duration: 24s; animation-delay: -12s; }
+
+    @keyframes waveMove {
+      0% { transform: translate(0,0) rotate(0deg) scale(1); }
+      50% { transform: translate(180px,-120px) rotate(180deg) scale(1.25); }
+      100% { transform: translate(-120px,160px) rotate(360deg) scale(0.9); }
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.78));
+      backdrop-filter: blur(2px);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 15px 5%;
+      background: rgba(0,0,0,0.72);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      max-width: 1250px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo { font-size: 1.35rem; font-weight: 800; white-space: nowrap; }
+    .logo span {
+      background: linear-gradient(90deg, #8b5cf6, #06b6d4, #ec4899);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    nav { display: flex; align-items: center; gap: 20px; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      opacity: 0.85;
+      transition: 0.3s;
+    }
+    nav a:hover { opacity: 1; color: #a78bfa; }
+
+    .language-box {
+      display: flex;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 4px;
+    }
+    .language-btn {
+      border: none;
+      background: transparent;
+      color: white;
+      padding: 7px 13px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .language-btn.active { background: white; color: black; }
+
+    .hero {
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero-content { max-width: 850px; }
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.07);
+      border-radius: 50px;
+      color: #ddd;
+      margin-bottom: 25px;
+    }
+    .hero h1 {
+      font-size: clamp(2.7rem, 8vw, 6rem);
+      line-height: 0.95;
+      margin-bottom: 25px;
+      font-weight: 900;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #a78bfa, #22d3ee, #f472b6, #a78bfa);
+      background-size: 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientMove 7s linear infinite;
+    }
+    @keyframes gradientMove {
+      from { background-position: 0%; }
+      to { background-position: 300%; }
+    }
+    .hero p {
+      color: #c7c7c7;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin: auto;
+    }
+    .hero-buttons {
+      margin-top: 35px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 23px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: white;
+      background: rgba(255,255,255,0.07);
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+    .btn:hover { transform: translateY(-3px); background: rgba(255,255,255,0.14); }
+    .btn-primary { background: linear-gradient(135deg, #7c3aed, #2563eb); border: none; }
+    .btn-whatsapp { background: var(--green); color: #001b08; border: none; }
+
+    .section {
+      max-width: 1250px;
+      margin: auto;
+      padding: 90px 20px;
+    }
+    .section-title { text-align: center; margin-bottom: 45px; }
+    .section-title h2 { font-size: clamp(2rem, 5vw, 3.3rem); margin-bottom: 12px; }
+    .section-title p { color: #aaa; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .product-card {
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      transition: 0.35s;
+    }
+    .product-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(167,139,250,0.5);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+    .product-image { width: 100%; height: 220px; object-fit: cover; background: #111; }
+    .product-content { padding: 20px; }
+    .product-content h3 { margin-bottom: 10px; }
+    .product-description { color: #aaa; line-height: 1.6; min-height: 50px; }
+    .product-bottom {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .price { font-size: 1.15rem; font-weight: bold; color: #a78bfa; }
+
+    .order-container {
+      max-width: 700px;
+      margin: auto;
+      padding: 30px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      backdrop-filter: blur(15px);
+    }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; margin-bottom: 8px; color: #ddd; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.5);
+      color: white;
+      outline: none;
+      font-size: 1rem;
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { border-color: #8b5cf6; }
+
+    .submit-order {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .submit-order:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(124,58,237,0.35);
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .contact-card {
+      padding: 30px;
+      text-align: center;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+    }
+    .contact-card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .contact-card a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    footer {
+      padding: 35px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: #888;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .empty-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: #999;
+      border: 1px dashed rgba(255,255,255,0.15);
+      border-radius: 20px;
+    }
+
+    .admin-panel, .auth-panel {
+      max-width: 900px;
+      margin: 30px auto 0;
+      padding: 25px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hidden { display: none !important; }
+    #admin { display: none; }
+    #admin.admin-open { display: block; }
+
+    .orders-list { display:grid; gap:15px; }
+    .order-card {
+      padding:20px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+    }
+    .order-card-head {
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:14px;
+    }
+    .order-meta { color:#aaa; line-height:1.7; font-size:0.95rem; }
+    .order-status {
+      display:inline-block;
+      padding:6px 11px;
+      border-radius:999px;
+      font-size:0.82rem;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+    .status-pending { background:rgba(245,158,11,.16); color:#fbbf24; }
+    .status-accepted { background:rgba(34,197,94,.16); color:#4ade80; }
+    .status-rejected { background:rgba(239,68,68,.16); color:#f87171; }
+    .order-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    .btn-accept { background:#16a34a; border:none; }
+    .btn-reject { background:#dc2626; border:none; }
+    .btn-delete { background:#374151; border:none; }
+    .order-empty {
+      text-align:center; padding:35px 15px; color:#999;
+      border:1px dashed rgba(255,255,255,.15); border-radius:16px;
+    }
+
+    @media (max-width: 1000px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      nav a { display: none; }
+    }
+    @media (max-width: 600px) {
+      header { padding: 12px 15px; }
+      .logo { font-size: 1.05rem; }
+      .language-btn { padding: 6px 9px; font-size: 0.8rem; }
+      .hero { min-height: 70vh; padding: 60px 15px; }
+      .hero h1 { font-size: 3.2rem; }
+      .hero p { font-size: 0.95rem; }
+      .products-grid { grid-template-columns: 1fr; }
+      .contact-box { grid-template-columns: 1fr; }
+      .order-container { padding: 20px; }
+    }
+    html[dir="rtl"] body { font-family: Arial, Tahoma, sans-serif; }
+    html[dir="rtl"] .product-bottom { flex-direction: row-reverse; }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="background">
+  <div class="wave one"></div>
+  <div class="wave two"></div>
+  <div class="wave three"></div>
+  <div class="wave four"></div>
+</div>
+
+<header>
+  <div class="nav">
+    <div class="logo"><span>Saddiki</span> Electroménager</div>
+
+    <nav>
+      <a href="#home" data-fr="Accueil" data-ar="الرئيسية">Accueil</a>
+      <a href="#products" data-fr="Produits" data-ar="المنتجات">Produits</a>
+      <a href="#order" data-fr="Commander" data-ar="طلب سلعة">Commander</a>
+      <a href="#contact" data-fr="Contact" data-ar="اتصل بنا">Contact</a>
+    </nav>
+
+    <div class="language-box">
+      <button class="language-btn active" id="frBtn" type="button" onclick="changeLanguage('fr')">FR</button>
+      <button class="language-btn" id="arBtn" type="button" onclick="changeLanguage('ar')">AR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="badge" data-fr="Électroménager & Maison" data-ar="الأجهزة الكهرومنزلية والمنزل">Électroménager & Maison</div>
+      <h1>
+        <span data-fr="Bienvenue chez" data-ar="مرحبا بكم في">Bienvenue chez</span><br>
+        <span class="gradient-text">Saddiki</span>
+      </h1>
+      <p data-fr="Découvrez nos produits électroménagers et commandez facilement pour une livraison." data-ar="اكتشفوا منتجاتنا الكهرومنزلية واطلبوا ما تحتاجونه بسهولة مع خدمة التوصيل.">
+        Découvrez nos produits électroménagers et commandez facilement pour une livraison.
+      </p>
+      <div class="hero-buttons">
+        <a href="#products" class="btn btn-primary" data-fr="Voir les produits" data-ar="مشاهدة المنتجات">Voir les produits</a>
+        <a href="https://wa.me/213772656995" target="_blank" class="btn btn-whatsapp">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="section-title">
+      <h2 data-fr="Nos produits" data-ar="منتجاتنا">Nos produits</h2>
+      <p data-fr="Découvrez nos dernières offres." data-ar="اكتشفوا أحدث منتجاتنا وعروضنا.">Découvrez nos dernières offres.</p>
+    </div>
+    <div class="products-grid" id="productsGrid">
+      <div class="empty-products">
+        <h3 data-fr="Produits bientôt disponibles" data-ar="المنتجات ستكون متوفرة قريباً">Produits bientôt disponibles</h3>
+        <p data-fr="Les produits ajoutés depuis le tableau de bord apparaîtront ici." data-ar="المنتجات التي تتم إضافتها من لوحة الإدارة ستظهر هنا.">
+          Les produits ajoutés depuis le tableau de bord apparaîtront ici.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="order">
+    <div class="section-title">
+      <h2 data-fr="Commander pour livraison" data-ar="طلب سلعة للتوصيل">Commander pour livraison</h2>
+      <p data-fr="Remplissez le formulaire et nous vous contacterons." data-ar="املأ الاستمارة وسنتواصل معكم لتأكيد الطلب.">
+        Remplissez le formulaire et nous vous contacterons.
+      </p>
+    </div>
+
+    <div class="order-container">
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="customerName" data-fr="Nom complet" data-ar="الاسم الكامل">Nom complet</label>
+          <input type="text" id="customerName" required autocomplete="name" placeholder="Votre nom">
+        </div>
+        <div class="form-group">
+          <label for="customerPhone" data-fr="Téléphone" data-ar="رقم الهاتف">Téléphone</label>
+          <input type="tel" id="customerPhone" required autocomplete="tel" placeholder="0772656995">
+        </div>
+        <div class="form-group">
+          <label for="customerAddress" data-fr="Adresse de livraison" data-ar="عنوان التوصيل">Adresse de livraison</label>
+          <input type="text" id="customerAddress" required autocomplete="street-address" placeholder="Adresse">
+        </div>
+        <div class="form-group">
+          <label for="customerProduct" data-fr="Produit souhaité" data-ar="المنتج المطلوب">Produit souhaité</label>
+          <input type="text" id="customerProduct" required placeholder="Produit">
+        </div>
+        <div class="form-group">
+          <label for="customerQuantity" data-fr="Quantité" data-ar="الكمية">Quantité</label>
+          <input type="number" id="customerQuantity" min="1" value="1" required>
+        </div>
+        <div class="form-group">
+          <label for="customerMessage" data-fr="Message / détails supplémentaires" data-ar="رسالة / تفاصيل إضافية">Message / détails supplémentaires</label>
+          <textarea id="customerMessage" placeholder="Informations supplémentaires..."></textarea>
+        </div>
+        <button type="submit" class="submit-order" data-fr="Envoyer la commande" data-ar="إرسال الطلب">Envoyer la commande</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="section-title">
+      <h2 data-fr="Contactez-nous" data-ar="تواصلوا معنا">Contactez-nous</h2>
+    </div>
+    <div class="contact-box">
+      <div class="contact-card">
+        <div class="icon">📞</div>
+        <p data-fr="Téléphone" data-ar="الهاتف">Téléphone</p><br>
+        <a href="tel:+213772656995">0772656995</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">💬</div>
+        <p>WhatsApp</p><br>
+        <a href="https://wa.me/213772656995" target="_blank">0772656995</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="admin">
+    <div class="section-title">
+      <h2 data-fr="Accès admin" data-ar="دخول الادمن">Accès admin</h2>
+      <p data-fr="Connexion par email et mot de passe." data-ar="تسجيل الدخول عبر البريد وكلمة المرور.">Connexion par email et mot de passe.</p>
+    </div>
+
+    <div class="auth-panel" id="loginPanel">
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="adminEmail">Email</label>
+          <input type="email" id="adminEmail" required placeholder="name@gmail.com">
+        </div>
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <input type="password" id="adminPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="submit-order">Login</button>
+      </form>
+    </div>
+
+    <div class="admin-panel hidden" id="dashboardPanel">
+      <h3 style="margin-bottom:15px;">Admin dashboard</h3>
+      <p style="margin-bottom:15px;color:#aaa;">You are connected as admin.</p>
+
+      <form id="productForm">
+        <div class="form-group">
+          <label for="pNameFr">Product name FR</label>
+          <input type="text" id="pNameFr" required>
+        </div>
+        <div class="form-group">
+          <label for="pNameAr">Product name AR</label>
+          <input type="text" id="pNameAr" required>
+        </div>
+        <div class="form-group">
+          <label for="pPrice">Price</label>
+          <input type="number" id="pPrice" step="0.01" min="0" required>
+        </div>
+        <div class="form-group">
+          <label for="pStock">Stock</label>
+          <input type="number" id="pStock" min="0" value="0" required>
+        </div>
+        <div class="form-group">
+          <label for="pImage">Image du produit</label>
+          <input
+            type="file"
+            id="pImage"
+            accept="image/*"
+            required
+          >
+          <small id="imageStatus" style="display:block;margin-top:8px;color:#aaa;">
+            Choisissez une image depuis votre téléphone ou votre ordinateur.
+          </small>
+          <div id="imagePreview" style="margin-top:12px;display:none;">
+            <img id="imagePreviewImg" alt="Aperçu" style="width:100%;max-width:320px;height:200px;object-fit:cover;border-radius:14px;border:1px solid var(--border);">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pDescFr">Description FR</label>
+          <textarea id="pDescFr"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pDescAr">Description AR</label>
+          <textarea id="pDescAr"></textarea>
+        </div>
+        <button type="submit" class="submit-order">Add product</button>
+      </form>
+      <button id="logoutBtn" class="btn" style="margin-top:15px;">Logout</button>
+
+      <div style="margin-top:35px;border-top:1px solid var(--border);padding-top:25px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:15px;">
+          <div>
+            <h3>Commandes</h3>
+            <p style="color:#aaa;margin-top:5px;">Voir, accepter ou refuser les commandes reçues.</p>
+          </div>
+          <button id="refreshOrdersBtn" type="button" class="btn">Actualiser</button>
+        </div>
+        <div id="ordersList">
+          <p style="color:#aaa;">Connectez-vous pour afficher les commandes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align:center;padding:10px 20px 35px;">
+    <button type="button" id="adminAccessBottom" style="background:none;border:none;color:#888;font-size:0.8rem;cursor:pointer;padding:6px 10px;" data-fr="Admin" data-ar="الادمن">Admin</button>
+  </div>
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Saddiki Electroménager.</p>
+</footer>
+
+<script>
+  const SUPABASE_URL = "https://fmfyovkuftpzhsvzkgyn.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_CcGQj8BkyOQqnYX42mvPVw_w83rdYge";
+
+  let currentLanguage = localStorage.getItem("language") || "fr";
+
+  let supabaseClient = null;
+  try {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  } catch (err) {
+    console.error("Supabase config error — check SUPABASE_URL / SUPABASE_ANON_KEY:", err);
+  }
+
+  function openAdminPanel() {
+    const adminSection = document.getElementById("admin");
+    adminSection.classList.add("admin-open");
+    adminSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  document.getElementById("adminAccessBtn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openAdminPanel();
+  });
+
+  document.getElementById("adminAccessBottom")?.addEventListener("click", openAdminPanel);
+
+
+  function changeLanguage(language) {
+    currentLanguage = language;
+    localStorage.setItem("language", language);
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+
+    document.querySelectorAll("[data-fr]").forEach(element => {
+      const text = element.getAttribute(`data-${language}`);
+      if (text) element.textContent = text;
+    });
+
+    document.getElementById("customerName").placeholder = language === "ar" ? "الاسم الكامل" : "Votre nom";
+    document.getElementById("customerPhone").placeholder = "0772656995";
+    document.getElementById("customerAddress").placeholder = language === "ar" ? "عنوان التوصيل" : "Adresse";
+    document.getElementById("customerProduct").placeholder = language === "ar" ? "اسم المنتج" : "Produit";
+    document.getElementById("customerMessage").placeholder = language === "ar" ? "تفاصيل إضافية..." : "Informations supplémentaires...";
+
+    document.getElementById("frBtn").classList.toggle("active", language === "fr");
+    document.getElementById("arBtn").classList.toggle("active", language === "ar");
+  }
+
+  async function loadProducts() {
+    if (!supabaseClient) return;
+
+    const { data, error } = await supabaseClient
+      .from("products")
+      .select("*")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+
+    const grid = document.getElementById("productsGrid");
+
+    if (error) {
+      grid.innerHTML = `<div class="empty-products"><h3>Error loading products</h3><p>${error.message}</p></div>`;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-products">
+          <h3 data-fr="Produits bientôt disponibles" data-ar="المنتجات ستكون متوفرة قريباً">Produits bientôt disponibles</h3>
+          <p data-fr="Les produits ajoutés depuis le tableau de bord apparaîtront ici." data-ar="المنتجات التي تتم إضافتها من لوحة الإدارة ستظهر هنا.">
+            Les produits ajoutés depuis le tableau de bord apparaîtront ici.
+          </p>
+        </div>`;
+      changeLanguage(currentLanguage);
+      return;
+    }
+
+    grid.innerHTML = data.map(product => `
+      <div class="product-card">
+        <img class="product-image" src="${product.image_url || 'https://via.placeholder.com/600x400?text=Saddiki'}" alt="${product.name_fr}">
+        <div class="product-content">
+          <h3>${currentLanguage === 'ar' ? product.name_ar : product.name_fr}</h3>
+          <p class="product-description">${currentLanguage === 'ar' ? (product.description_ar || '') : (product.description_fr || '')}</p>
+          <div class="product-bottom">
+            <span class="price">${product.price} DA</span>
+            <button class="btn btn-primary" type="button" onclick="prefillOrder('${currentLanguage === 'ar' ? product.name_ar : product.name_fr}')">
+              ${currentLanguage === 'ar' ? 'اطلب الآن' : 'Commander'}
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function prefillOrder(productName) {
+    document.getElementById("customerProduct").value = productName;
+    document.getElementById("order").scrollIntoView({ behavior: "smooth" });
+  }
+
+  document.getElementById("orderForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    if (!supabaseClient) {
+      alert("Supabase n'est pas configuré (SUPABASE_URL / SUPABASE_ANON_KEY).");
+      return;
+    }
+
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+    const product = document.getElementById("customerProduct").value.trim();
+    const quantity = document.getElementById("customerQuantity").value;
+    const message = document.getElementById("customerMessage").value.trim();
+
+    if (!name || !phone || !address || !product || !quantity) {
+      alert(currentLanguage === "ar" ? "يرجى ملء جميع المعلومات المطلوبة." : "Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    const orderText = currentLanguage === "ar"
+      ? `طلب جديد:
+الاسم: ${name}
+الهاتف: ${phone}
+العنوان: ${address}
+المنتج: ${product}
+الكمية: ${quantity}
+الرسالة: ${message || "-"}`
+      : `Nouvelle commande:
+Nom: ${name}
+Téléphone: ${phone}
+Adresse: ${address}
+Produit: ${product}
+Quantité: ${quantity}
+Message: ${message || "-"}`;
+
+    const orderNotes = [
+      `Produit: ${product}`,
+      `Quantité: ${quantity}`,
+      `Détails: ${message || "-"}`
+    ].join("\n");
+
+    const { error } = await supabaseClient.from("orders").insert([{
+      full_name: name,
+      phone,
+      address,
+      notes: orderNotes,
+      total_amount: 0,
+      status: "pending"
+    }]);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    window.open(`https://wa.me/213772656995?text=${encodeURIComponent(orderText)}`, "_blank");
+    this.reset();
+    document.getElementById("customerQuantity").value = 1;
+  });
+
+  async function checkAdminSession() {
+    if (!supabaseClient) {
+      document.getElementById("loginPanel").classList.remove("hidden");
+      document.getElementById("dashboardPanel").classList.add("hidden");
+      return;
+    }
+
+    const { data } = await supabaseClient.auth.getSession();
+    const session = data.session;
+
+    if (!session) {
+      document.getElementById("loginPanel").classList.remove("hidden");
+      document.getElementById("dashboardPanel").classList.add("hidden");
+      return;
+    }
+
+    const { data: roleData } = await supabaseClient
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", session.user.id)
+      .single();
+
+    if (roleData && roleData.role === "admin") {
+      document.getElementById("loginPanel").classList.add("hidden");
+      document.getElementById("dashboardPanel").classList.remove("hidden");
+      await loadOrders();
+    } else {
+      await supabaseClient.auth.signOut();
+      document.getElementById("loginPanel").classList.remove("hidden");
+      document.getElementById("dashboardPanel").classList.add("hidden");
+    }
+  }
+
+  document.getElementById("adminLoginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!supabaseClient) {
+      alert("Supabase n'est pas configuré (SUPABASE_URL / SUPABASE_ANON_KEY).");
+      return;
+    }
+
+    const email = document.getElementById("adminEmail").value.trim();
+    const password = document.getElementById("adminPassword").value;
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    const { data: roleData, error: roleError } = await supabaseClient
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", data.user.id)
+      .single();
+
+    if (roleError || !roleData || roleData.role !== "admin") {
+      await supabaseClient.auth.signOut();
+      alert("Access denied");
+      return;
+    }
+
+    await checkAdminSession();
+  });
+
+  document.getElementById("pImage").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    const previewBox = document.getElementById("imagePreview");
+    const previewImg = document.getElementById("imagePreviewImg");
+    const imageStatus = document.getElementById("imageStatus");
+
+    if (!file) {
+      previewBox.style.display = "none";
+      imageStatus.textContent = "Choisissez une image depuis votre téléphone ou votre ordinateur.";
+      imageStatus.style.color = "#aaa";
+      return;
+    }
+
+    previewImg.src = URL.createObjectURL(file);
+    previewBox.style.display = "block";
+    imageStatus.textContent = `${file.name} — ${(file.size / 1024 / 1024).toFixed(2)} Mo`;
+    imageStatus.style.color = "#ddd";
+  });
+
+  document.getElementById("productForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!supabaseClient) {
+      alert("Supabase n'est pas configuré (SUPABASE_URL / SUPABASE_ANON_KEY).");
+      return;
+    }
+
+    const pNameFr = document.getElementById("pNameFr").value.trim();
+    const pNameAr = document.getElementById("pNameAr").value.trim();
+    const pPrice = Number(document.getElementById("pPrice").value);
+    const pStock = Number(document.getElementById("pStock").value);
+    const imageFile = document.getElementById("pImage").files[0];
+    const pDescFr = document.getElementById("pDescFr").value.trim();
+    const pDescAr = document.getElementById("pDescAr").value.trim();
+    const imageStatus = document.getElementById("imageStatus");
+
+    if (!imageFile) {
+      alert(currentLanguage === "ar"
+        ? "يرجى اختيار صورة للمنتج."
+        : "Veuillez choisir une image pour le produit.");
+      return;
+    }
+
+    if (!imageFile.type.startsWith("image/")) {
+      alert(currentLanguage === "ar"
+        ? "الملف المختار ليس صورة."
+        : "Le fichier sélectionné n'est pas une image.");
+      return;
+    }
+
+    // Limite à 5 MB pour éviter les fichiers trop lourds
+    if (imageFile.size > 5 * 1024 * 1024) {
+      alert(currentLanguage === "ar"
+        ? "حجم الصورة يجب أن يكون أقل من 5 Mo."
+        : "La taille de l'image doit être inférieure à 5 Mo.");
+      return;
+    }
+
+    try {
+      const extension = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
+      const safeBaseName = (pNameFr || "produit")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 60) || "produit";
+
+      const filePath = `${Date.now()}-${safeBaseName}.${extension}`;
+
+      imageStatus.textContent = "Téléversement de l'image...";
+      imageStatus.style.color = "#a78bfa";
+
+      const { error: uploadError } = await supabaseClient.storage
+        .from("product-images")
+        .upload(filePath, imageFile, {
+          cacheControl: "3600",
+          upsert: false
+        });
+
+      if (uploadError) {
+        alert(uploadError.message);
+        imageStatus.textContent = "Échec du téléversement.";
+        imageStatus.style.color = "#f87171";
+        return;
+      }
+
+      const { data: publicUrlData } = supabaseClient.storage
+        .from("product-images")
+        .getPublicUrl(filePath);
+
+      const imageUrl = publicUrlData.publicUrl;
+
+      imageStatus.textContent = "Image téléversée avec succès.";
+      imageStatus.style.color = "#4ade80";
+
+      const { error } = await supabaseClient.from("products").insert([{
+        name_fr: pNameFr,
+        name_ar: pNameAr,
+        price: pPrice,
+        stock: pStock,
+        image_url: imageUrl,
+        description_fr: pDescFr,
+        description_ar: pDescAr,
+        is_active: true
+      }]);
+
+      if (error) {
+        // Si l'insertion échoue, on essaie de supprimer l'image nouvellement uploadée.
+        await supabaseClient.storage.from("product-images").remove([filePath]);
+        alert(error.message);
+        return;
+      }
+
+      alert("Product added");
+      e.target.reset();
+      document.getElementById("imagePreview").style.display = "none";
+      imageStatus.textContent = "Choisissez une image depuis votre téléphone ou votre ordinateur.";
+      imageStatus.style.color = "#aaa";
+      loadProducts();
+    } catch (err) {
+      console.error(err);
+      alert(err.message || "Une erreur est survenue.");
+      imageStatus.textContent = "Erreur lors du téléversement.";
+      imageStatus.style.color = "#f87171";
+    }
+  });
+
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatOrderDate(value) {
+    if (!value) return "-";
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return value;
+    return d.toLocaleString("fr-FR");
+  }
+
+  function statusLabel(status) {
+    if (status === "accepted") return "Acceptée";
+    if (status === "rejected") return "Refusée";
+    return "En attente";
+  }
+
+  async function loadOrders() {
+    const list = document.getElementById("ordersList");
+    if (!list || !supabaseClient) return;
+
+    list.innerHTML = '<p style="color:#aaa;">Chargement des commandes...</p>';
+
+    const { data, error } = await supabaseClient
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      list.innerHTML = `<div class="order-empty"><p>Erreur: ${escapeHtml(error.message)}</p></div>`;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      list.innerHTML = '<div class="order-empty">Aucune commande pour le moment.</div>';
+      return;
+    }
+
+    list.innerHTML = `<div class="orders-list">${
+      data.map(order => {
+        const status = order.status || "pending";
+        const statusClass =
+          status === "accepted" ? "status-accepted" :
+          status === "rejected" ? "status-rejected" : "status-pending";
+
+        return `
+          <div class="order-card">
+            <div class="order-card-head">
+              <div>
+                <h3>${escapeHtml(order.full_name || "Client")}</h3>
+                <div class="order-meta">
+                  📞 ${escapeHtml(order.phone || "-")}<br>
+                  📍 ${escapeHtml(order.address || "-")}<br>
+                  🛒 ${escapeHtml(order.notes || "-")}<br>
+                  🕒 ${escapeHtml(formatOrderDate(order.created_at))}
+                </div>
+              </div>
+              <span class="order-status ${statusClass}">${statusLabel(status)}</span>
+            </div>
+
+            <div class="order-actions">
+              ${status !== "accepted" ? `
+                <button type="button" class="btn btn-accept" onclick="updateOrderStatus('${order.id}', 'accepted')">
+                  ✓ Accepter
+                </button>` : ""}
+              ${status !== "rejected" ? `
+                <button type="button" class="btn btn-reject" onclick="updateOrderStatus('${order.id}', 'rejected')">
+                  ✕ Refuser
+                </button>` : ""}
+              <button type="button" class="btn btn-delete" onclick="deleteOrder('${order.id}')">
+                🗑 Supprimer
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("")
+    }</div>`;
+  }
+
+  async function updateOrderStatus(orderId, newStatus) {
+    if (!supabaseClient) return;
+
+    const { error } = await supabaseClient
+      .from("orders")
+      .update({ status: newStatus })
+      .eq("id", orderId);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    await loadOrders();
+  }
+
+  async function deleteOrder(orderId) {
+    if (!supabaseClient) return;
+    if (!confirm("Supprimer cette commande définitivement ?")) return;
+
+    const { error } = await supabaseClient
+      .from("orders")
+      .delete()
+      .eq("id", orderId);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    await loadOrders();
+  }
+
+  document.getElementById("refreshOrdersBtn")?.addEventListener("click", loadOrders);
+
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    if (!supabaseClient) return;
+    await supabaseClient.auth.signOut();
+    await checkAdminSession();
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  changeLanguage(currentLanguage);
+  loadProducts();
+  checkAdminSession();
+
+  if (supabaseClient) {
+    supabaseClient.auth.onAuthStateChange(() => {
+      setTimeout(checkAdminSession, 0);
+    });
+  }
+</script>
+
+</body>
+</html>
